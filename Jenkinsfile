@@ -8,12 +8,12 @@ pipeline {
         }
         stage('Build Docker Image') {
              steps {
-                sh 'sudo docker build -t --tag gcr.io/inima-smart/producer-consumer:$GIT_COMMIT .'
+                sh 'docker build -t --tag gcr.io/inima-smart/producer-consumer:$GIT_COMMIT .'
             }
         }
         stage('Pull Docker Image to Registry') {
              steps {
-                sh 'sudo docker push gcr.io/inima-smart/producer-consumer:$GIT_COMMIT'
+                sh 'docker push gcr.io/inima-smart/producer-consumer:$GIT_COMMIT'
             }
         }
         stage('Deploy on K8 Cluster') {
