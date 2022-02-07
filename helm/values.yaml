@@ -1,0 +1,12 @@
+replicaCount: 1
+app: producer-consumer
+namespace: qa
+image:
+  repository: gcr.io/inima-smart/producer-consumer
+  tag: :GIT_COMMIT
+  name: producer-consumer
+  port: 8080
+  targetport: 80
+service:
+  name: producer-consumer-svc
+  type: LoadBalancer

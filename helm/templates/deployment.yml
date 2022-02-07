@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.image.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.image.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: {{ .Values.image.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.image.name }}
+    spec:
+      containers:
+        - name: {{ .Values.image.name }}
+          image: {{ .Values.image.repository }}{{ .Values.image.tag }}
+          lifecycle:
+            postStart:
+              exec:
+                command: ['sh', '-c', 'echo "34.76.220.34 inima-system-jenkins-prod.europe-west1-b.c.inima-smart.internal" >> /etc/hosts']
+          ports:
+            - containerPort: {{ .Values.image.port }}
