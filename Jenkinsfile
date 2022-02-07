@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build Docker Image') {
              steps {
-                sh 'docker build -t --tag gcr.io/inima-smart/producer-consumer:$GIT_COMMIT .'
+                sh 'docker build -t gcr.io/inima-smart/producer-consumer:$GIT_COMMIT .'
             }
         }
         stage('Pull Docker Image to Registry') {
