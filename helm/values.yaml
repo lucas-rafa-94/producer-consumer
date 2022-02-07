@@ -9,4 +9,7 @@ image:
   targetport: 80
 service:
   name: producer-consumer-svc
-  type: LoadBalancer
+  type: NodePort
+ingress:
+  host: kafka.waterfy.net
+  name: producer-consumer-ingress
